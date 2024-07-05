@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace OneOffTech\LibrarianClient\Tests;
 
 use PHPUnit\Framework\TestCase;
 
