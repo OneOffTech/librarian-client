@@ -1,0 +1,8 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "content-length": "185",
+        "content-type": "application\/json"
+    },
+    "data": "{\"id\":\"localhost\",\"name\":\"Localhost Library\",\"config\":{\"database\":{\"index_fields\":[\"resource_id\"]},\"text\":{\"n_context_chunk\":10,\"chunk_length\":490,\"chunk_overlap\":10},\"enable_guardian\":false}}"
+}
