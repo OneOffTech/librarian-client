@@ -4,6 +4,7 @@ namespace OneOffTech\LibrarianClient\Tests\Libraries;
 
 use OneOffTech\LibrarianClient\Dto\Library;
 use OneOffTech\LibrarianClient\Dto\LibraryConfiguration;
+use OneOffTech\LibrarianClient\Exceptions\ValidationException;
 use OneOffTech\LibrarianClient\Requests\Library\CreateLibraryRequest;
 use OneOffTech\LibrarianClient\Tests\Base;
 use Saloon\Http\Faking\MockClient;
@@ -44,5 +45,23 @@ class CreateLibraryTest extends Base
                 $body['id'] === 'test' &&
                 $body['name'] === 'Unit Test';
         });
+    }
+
+    public function test_library_not_created_with_empty_id(): void
+    {
+        $mockClient = MockClient::global([
+            CreateLibraryRequest::class => MockResponse::fixture('libraries-create'),
+        ]);
+
+        $connector = $this->connector($mockClient);
+
+        $data = new Library('', 'Unit Test');
+
+        $this->expectException(ValidationException::class);
+
+        $connector->libraries()->create($data);
+
+        $mockClient->assertNotSent(CreateLibraryRequest::class);
+
     }
 }

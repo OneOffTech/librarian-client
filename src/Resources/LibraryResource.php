@@ -27,7 +27,7 @@ class LibraryResource extends BaseResource
 
     public function create(Library $library): LibrarianResponse
     {
-        return $this->connector->send(new CreateLibraryRequest($library));
+        return $this->connector->send((new CreateLibraryRequest($library))->validate());
     }
 
     public function update(string $id, LibraryConfiguration $configuration): LibrarianResponse

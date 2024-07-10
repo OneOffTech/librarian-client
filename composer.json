@@ -16,6 +16,8 @@
     ],
     "require": {
         "php": "^8.2",
+        "cuyz/valinor": "^1.12",
+        "respect/validation": "^2.3",
         "saloonphp/saloon": "^3.6"
     },
     "require-dev": {
@@ -35,7 +37,7 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit",
+        "test": "vendor/bin/phpunit --no-coverage",
             "test-coverage": "vendor/bin/phpunit --coverage",
         "format": "vendor/bin/pint"
     },

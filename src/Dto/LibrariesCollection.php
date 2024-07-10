@@ -12,13 +12,4 @@ class LibrariesCollection implements WithResponse
     public function __construct(
         public readonly array $items,
     ) {}
-
-    // "database" => [
-    //             "index_fields" => $this->config['library-settings']['indexed-fields'] ?? ['resource_id']
-    //         ],
-    //         "text" => $this->config['library-settings']['text-processing'] ?? [
-    //             "n_context_chunk" => 10,
-    //             "chunk_length" => 490,
-    //             "chunk_overlap" => 10
-    //         ],
 }
