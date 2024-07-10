@@ -4,6 +4,7 @@ namespace OneOffTech\LibrarianClient\Connectors;
 
 use OneOffTech\LibrarianClient\Resources\LibraryResource;
 use OneOffTech\LibrarianClient\Resources\PromptResource;
+use OneOffTech\LibrarianClient\Resources\SummaryResource;
 use OneOffTech\LibrarianClient\Responses\LibrarianResponse;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
@@ -89,5 +90,10 @@ class LibrarianConnector extends Connector
     public function prompts(): PromptResource
     {
         return new PromptResource($this);
+    }
+
+    public function summaries(string $library_id): SummaryResource
+    {
+        return new SummaryResource($library_id, $this);
     }
 }
