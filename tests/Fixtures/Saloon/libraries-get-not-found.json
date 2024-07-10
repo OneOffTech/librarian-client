@@ -1,0 +1,8 @@
+{
+    "statusCode": 404,
+    "headers": {
+        "content-length": "49",
+        "content-type": "application\/json"
+    },
+    "data": "{\"detail\":\"Library `library` not found [Qdrant]\"}"
+}

@@ -1,0 +1,8 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "content-length": "42",
+        "content-type": "application\/json"
+    },
+    "data": "{\"message\":\"Prompts updated succesfully.\"}"
+}

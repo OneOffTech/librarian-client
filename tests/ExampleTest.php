@@ -2,6 +2,10 @@
 
 namespace OneOffTech\LibrarianClient\Tests;
 
-use PHPUnit\Framework\TestCase;
-
-class ExampleTest extends TestCase {}
+class ExampleTest extends Base
+{
+    public function test_example(): void
+    {
+        $this->assertTrue(true);
+    }
+}

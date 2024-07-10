@@ -1,0 +1,8 @@
+{
+    "statusCode": 201,
+    "headers": {
+        "content-length": "54",
+        "content-type": "application\/json"
+    },
+    "data": "{\"message\":\"Library `test` successfully created.\"}"
+}
