@@ -1,0 +1,8 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "content-length": "66",
+        "content-type": "application\/json"
+    },
+    "data": "{\"id\":\"id\",\"lang\":\"en\",\"text\":\"The summary.\"}"
+}
