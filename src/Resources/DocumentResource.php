@@ -4,10 +4,12 @@ namespace OneOffTech\LibrarianClient\Resources;
 
 use OneOffTech\LibrarianClient\Dto\Document;
 use OneOffTech\LibrarianClient\Dto\DocumentsCollection;
+use OneOffTech\LibrarianClient\Dto\Text;
 use OneOffTech\LibrarianClient\Requests\Document\AllDocumentRequest;
 use OneOffTech\LibrarianClient\Requests\Document\CreateDocumentRequest;
 use OneOffTech\LibrarianClient\Requests\Document\DeleteDocumentRequest;
 use OneOffTech\LibrarianClient\Requests\Document\GetDocumentRequest;
+use OneOffTech\LibrarianClient\Requests\Document\SummarizeDocumentRequest;
 use OneOffTech\LibrarianClient\Responses\LibrarianResponse;
 use Saloon\Http\BaseResource;
 use Saloon\Http\Connector;
@@ -32,6 +34,11 @@ class DocumentResource extends BaseResource
     public function get(string $id): Document
     {
         return $this->connector->send(new GetDocumentRequest($this->library_id, $id))->dto();
+    }
+
+    public function summarize(string $id): Text
+    {
+        return $this->connector->send(new SummarizeDocumentRequest($this->library_id, $id))->dto();
     }
 
     public function create(Document $document): LibrarianResponse
