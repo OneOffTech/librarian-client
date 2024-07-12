@@ -1,0 +1,8 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "content-length": "89",
+        "content-type": "application\/json"
+    },
+    "data": "{\"message\":\"Document `01hg81pwdd626zs0yskxtq3vfm` removed from the library `localhost`.\"}"
+}

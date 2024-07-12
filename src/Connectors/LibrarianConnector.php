@@ -2,6 +2,7 @@
 
 namespace OneOffTech\LibrarianClient\Connectors;
 
+use OneOffTech\LibrarianClient\Resources\DocumentResource;
 use OneOffTech\LibrarianClient\Resources\LibraryResource;
 use OneOffTech\LibrarianClient\Resources\PromptResource;
 use OneOffTech\LibrarianClient\Resources\SummaryResource;
@@ -95,5 +96,10 @@ class LibrarianConnector extends Connector
     public function summaries(string $library_id): SummaryResource
     {
         return new SummaryResource($library_id, $this);
+    }
+
+    public function documents(string $library_id): DocumentResource
+    {
+        return new DocumentResource($library_id, $this);
     }
 }
