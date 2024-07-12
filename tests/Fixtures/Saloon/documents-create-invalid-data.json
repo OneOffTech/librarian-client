@@ -1,0 +1,10 @@
+{
+    "statusCode": 422,
+    "headers": {
+        "date": "Fri, 12 Jul 2024 12:34:37 GMT",
+        "server": "uvicorn",
+        "content-length": "186",
+        "content-type": "application\/json"
+    },
+    "data": "{\"detail\":[{\"type\":\"list_type\",\"loc\":[\"body\",\"data\"],\"msg\":\"Input should be a valid list\",\"input\":{\"text\":\"First page text\",\"title\":\"Test document title\",\"metadata\":{\"page_number\":1}}}]}"
+}
