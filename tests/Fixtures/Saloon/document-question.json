@@ -1,0 +1,7 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "content-type": "application\/json"
+    },
+    "data": "{\"text\":\"The answer.\",\"refs\":[{\"id\":\"d1\",\"page_number\":20}],\"id\":\"question-id\",\"lang\":\"en\"}"
+}

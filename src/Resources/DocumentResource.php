@@ -2,13 +2,16 @@
 
 namespace OneOffTech\LibrarianClient\Resources;
 
+use OneOffTech\LibrarianClient\Dto\Answer;
 use OneOffTech\LibrarianClient\Dto\Document;
 use OneOffTech\LibrarianClient\Dto\DocumentsCollection;
+use OneOffTech\LibrarianClient\Dto\Question;
 use OneOffTech\LibrarianClient\Dto\Text;
 use OneOffTech\LibrarianClient\Requests\Document\AllDocumentRequest;
 use OneOffTech\LibrarianClient\Requests\Document\CreateDocumentRequest;
 use OneOffTech\LibrarianClient\Requests\Document\DeleteDocumentRequest;
 use OneOffTech\LibrarianClient\Requests\Document\GetDocumentRequest;
+use OneOffTech\LibrarianClient\Requests\Document\QuestionDocumentRequest;
 use OneOffTech\LibrarianClient\Requests\Document\SummarizeDocumentRequest;
 use OneOffTech\LibrarianClient\Responses\LibrarianResponse;
 use Saloon\Http\BaseResource;
@@ -39,6 +42,11 @@ class DocumentResource extends BaseResource
     public function summarize(string $id): Text
     {
         return $this->connector->send(new SummarizeDocumentRequest($this->library_id, $id))->dto();
+    }
+
+    public function ask(string $id, Question $question): Answer
+    {
+        return $this->connector->send((new QuestionDocumentRequest($this->library_id, $id, $question))->validate())->dto();
     }
 
     public function create(Document $document): LibrarianResponse
