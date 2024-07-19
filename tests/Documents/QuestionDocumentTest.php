@@ -22,23 +22,23 @@ class QuestionDocumentTest extends Base
         $question = new Question(
             id: 'question-id',
             language: 'en',
-            content: 'This is a question',
+            text: 'This is a question',
         );
 
         $answer = $connector->documents('localhost')->ask('d-1', $question);
 
         $this->assertEquals('question-id', $answer->id);
 
-        $this->assertEquals('en', $answer->language);
+        $this->assertEquals('en', $answer->lang);
 
-        $this->assertEquals('The answer.', $answer->content);
+        $this->assertEquals('The answer.', $answer->text);
 
         $this->assertEquals([
             [
                 'id' => 'd1',
                 'page_number' => 20,
             ],
-        ], $answer->references);
+        ], $answer->refs);
 
         $mockClient->assertSent(QuestionDocumentRequest::class);
 
@@ -60,18 +60,18 @@ class QuestionDocumentTest extends Base
         $question = new Question(
             id: 'question-id',
             language: 'en',
-            content: 'This is a question',
+            text: 'This is a question',
         );
 
         $answer = $connector->documents('localhost')->ask('d-1', $question);
 
         $this->assertEquals('question-id', $answer->id);
 
-        $this->assertEquals('en', $answer->language);
+        $this->assertEquals('en', $answer->lang);
 
-        $this->assertEquals('The answer.', $answer->content);
+        $this->assertEquals('The answer.', $answer->text);
 
-        $this->assertEmpty($answer->references);
+        $this->assertEmpty($answer->refs);
 
         $mockClient->assertSent(QuestionDocumentRequest::class);
 

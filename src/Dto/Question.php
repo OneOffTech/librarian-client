@@ -12,6 +12,6 @@ class Question implements WithResponse
     public function __construct(
         public readonly string $id,
         public readonly string $language,
-        public readonly string $content,
+        public readonly string $text,
     ) {}
 }

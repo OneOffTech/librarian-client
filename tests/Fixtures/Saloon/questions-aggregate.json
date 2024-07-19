@@ -1,0 +1,8 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "content-length": "2095",
+        "content-type": "application\/json"
+    },
+    "data": "{\"text\":\"Aggregated answer.\",\"refs\":[],\"id\":\"q-id\",\"lang\":\"en\"}"
+}

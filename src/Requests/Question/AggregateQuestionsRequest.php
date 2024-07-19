@@ -1,9 +1,11 @@
 <?php
 
-namespace OneOffTech\LibrarianClient\Requests\Document;
+namespace OneOffTech\LibrarianClient\Requests\Question;
 
 use OneOffTech\LibrarianClient\Dto\Answer;
+use OneOffTech\LibrarianClient\Dto\AnswerCollection;
 use OneOffTech\LibrarianClient\Dto\Question;
+use OneOffTech\LibrarianClient\Dto\QuestionTransformation;
 use OneOffTech\LibrarianClient\Exceptions\ValidationException as ExceptionsValidationException;
 use Respect\Validation\Exceptions\ValidationException;
 use Respect\Validation\Validator;
@@ -13,7 +15,7 @@ use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 
-class QuestionDocumentRequest extends Request implements HasBody
+class AggregateQuestionsRequest extends Request implements HasBody
 {
     use HasJsonBody;
 
@@ -21,23 +23,32 @@ class QuestionDocumentRequest extends Request implements HasBody
 
     public function __construct(
         protected readonly string $library_id,
-        protected readonly string $document_id,
         protected readonly Question $question,
+        protected readonly AnswerCollection $answers,
+        protected readonly QuestionTransformation $transform,
     ) {
         //
     }
 
     public function resolveEndpoint(): string
     {
-        return "/library/{$this->library_id}/documents/{$this->document_id}/questions";
+        return "/library/{$this->library_id}/questions/aggregate";
     }
 
     protected function defaultBody(): array
     {
         return [
-            'id' => $this->question->id,
-            'lang' => $this->question->language,
-            'text' => $this->question->text,
+            'question' => [
+                'id' => $this->question->id,
+                'lang' => $this->question->language,
+                'text' => $this->question->text,
+            ],
+            'answers' => $this->answers->items,
+            'transformation' => [
+                'id' => $this->transform->id->value,
+                'args' => $this->transform->args,
+                'append' => $this->transform->append,
+            ],
         ];
     }
 
