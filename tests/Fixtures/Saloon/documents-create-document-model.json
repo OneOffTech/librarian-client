@@ -1,0 +1,8 @@
+{
+    "statusCode": 201,
+    "headers": {
+        "content-length": "73",
+        "content-type": "application\/json"
+    },
+    "data": "{\"message\":\"Document `test-format-id` added to the library `localhost`.\"}"
+}

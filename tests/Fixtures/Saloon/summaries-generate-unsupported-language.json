@@ -1,0 +1,8 @@
+{
+    "statusCode": 422,
+    "headers": {
+        "content-length": "132",
+        "content-type": "application\/json"
+    },
+    "data": "{\"detail\":{\"detail\":[{\"type\":\"lang_not_supported\",\"loc\":[\"body\",\"lang\"],\"msg\":\"The given language is not supported\",\"input\":\"zz\"}]}}"
+}

@@ -87,12 +87,83 @@ class CreateDocumentTest extends Base
             'metadata' => ['page_number' => 1],
         ];
 
-        $data = new Document('test-id', 'en', [$documentContent]);
+        $data = new Document('test-id', 'en', $documentContent);
 
         $this->expectException(UnprocessableEntityException::class);
 
         $connector->documents('localhost')->create($data);
 
         $mockClient->assertSent(CreateDocumentRequest::class);
+    }
+
+    public function test_document_created_with_new_format(): void
+    {
+        $mockClient = MockClient::global([
+            CreateDocumentRequest::class => MockResponse::fixture('documents-create-document-model'),
+        ]);
+
+        $connector = $this->connector($mockClient);
+
+        $documentContent = [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'category' => 'page',
+                    'attributes' => [
+                        'page' => 1,
+                    ],
+                    'content' => [
+                        [
+                            'role' => 'heading',
+                            'text' => 'Example Heading',
+                            'marks' => [
+                                [
+                                    'category' => 'textStyle',
+                                    'color' => [
+                                        'r' => 0,
+                                        'b' => 0,
+                                        'g' => 0,
+                                        'id' => 'color-0',
+                                    ],
+                                    'font' => [
+                                        'name' => 'arialmt',
+                                        'id' => 'font-300',
+                                        'size' => 26,
+                                    ],
+                                ],
+                            ],
+                            'attributes' => [
+                                'bounding_box' => [
+                                    [
+                                        'min_x' => 72.0,
+                                        'min_y' => 745.2,
+                                        'max_x' => 517.1,
+                                        'max_y' => 757.4,
+                                        'page' => 1,
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $data = new Document('test-format-id', 'en', $documentContent);
+
+        $connector->documents('localhost')->create($data);
+
+        $mockClient->assertSent(CreateDocumentRequest::class);
+
+        $mockClient->assertSentCount(1);
+
+        $mockClient->assertSent(function (Request $request) {
+            $body = $request->body()->all();
+
+            return $request->resolveEndpoint() === '/library/localhost/documents' &&
+                $body['id'] === 'test-format-id' &&
+                $body['lang'] === 'en' &&
+                $body['data']['type'] === 'doc';
+        });
     }
 }

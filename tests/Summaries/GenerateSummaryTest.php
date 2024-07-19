@@ -6,6 +6,7 @@ use OneOffTech\LibrarianClient\Dto\Text;
 use OneOffTech\LibrarianClient\Exceptions\ValidationException;
 use OneOffTech\LibrarianClient\Requests\Summary\GenerateSummaryRequest;
 use OneOffTech\LibrarianClient\Tests\Base;
+use Saloon\Exceptions\Request\Statuses\UnprocessableEntityException;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Http\Request;
@@ -107,5 +108,26 @@ class GenerateSummaryTest extends Base
         $connector->summaries('localhost')->generate($data);
 
         $mockClient->assertNotSent(GenerateSummaryRequest::class);
+    }
+
+    public function test_unsupported_language(): void
+    {
+        $mockClient = MockClient::global([
+            GenerateSummaryRequest::class => MockResponse::fixture('summaries-generate-unsupported-language'),
+        ]);
+
+        $connector = $this->connector($mockClient);
+
+        $data = new Text(
+            id: 'id',
+            language: 'zz',
+            content: 'The content',
+        );
+
+        $this->expectException(UnprocessableEntityException::class);
+
+        $connector->summaries('localhost')->generate($data);
+
+        $mockClient->assertSent(GenerateSummaryRequest::class);
     }
 }
