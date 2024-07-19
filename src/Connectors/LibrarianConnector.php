@@ -5,6 +5,7 @@ namespace OneOffTech\LibrarianClient\Connectors;
 use OneOffTech\LibrarianClient\Resources\DocumentResource;
 use OneOffTech\LibrarianClient\Resources\LibraryResource;
 use OneOffTech\LibrarianClient\Resources\PromptResource;
+use OneOffTech\LibrarianClient\Resources\QuestionResource;
 use OneOffTech\LibrarianClient\Resources\SummaryResource;
 use OneOffTech\LibrarianClient\Responses\LibrarianResponse;
 use Saloon\Http\Auth\TokenAuthenticator;
@@ -101,5 +102,10 @@ class LibrarianConnector extends Connector
     public function documents(string $library_id): DocumentResource
     {
         return new DocumentResource($library_id, $this);
+    }
+
+    public function questions(string $library_id): QuestionResource
+    {
+        return new QuestionResource($library_id, $this);
     }
 }
