@@ -2,6 +2,7 @@
 
 namespace OneOffTech\LibrarianClient\Connectors;
 
+use OneOffTech\LibrarianClient\Resources\ClassifierResource;
 use OneOffTech\LibrarianClient\Resources\DocumentResource;
 use OneOffTech\LibrarianClient\Resources\LibraryResource;
 use OneOffTech\LibrarianClient\Resources\PromptResource;
@@ -107,5 +108,10 @@ class LibrarianConnector extends Connector
     public function questions(string $library_id): QuestionResource
     {
         return new QuestionResource($library_id, $this);
+    }
+
+    public function classifiers(string $library_id): ClassifierResource
+    {
+        return new ClassifierResource($library_id, $this);
     }
 }
