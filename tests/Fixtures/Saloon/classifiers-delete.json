@@ -1,0 +1,8 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "content-length": "67",
+        "content-type": "application\/json"
+    },
+    "data": "{\"message\":\"Classifier `test-classifier-id` successfully deleted.\"}"
+}
