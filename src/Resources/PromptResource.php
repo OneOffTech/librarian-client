@@ -13,6 +13,6 @@ class PromptResource extends BaseResource
      */
     public function sync(): Response
     {
-        return $this->connector->send(new UpdatePromptsRequest());
+        return $this->connector->send(new UpdatePromptsRequest);
     }
 }

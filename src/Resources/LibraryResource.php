@@ -17,7 +17,7 @@ class LibraryResource extends BaseResource
 {
     public function all(): LibrariesCollection
     {
-        return $this->connector->send(new AllLibraryRequest())->dto();
+        return $this->connector->send(new AllLibraryRequest)->dto();
     }
 
     public function get(string $id): Library
