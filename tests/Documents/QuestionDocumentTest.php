@@ -37,8 +37,8 @@ class QuestionDocumentTest extends Base
             [
                 'id' => 'd1',
                 'page_number' => 20,
-                "score" => 0.5881791,
-                "bounding_box" => null
+                'score' => 0.5881791,
+                'bounding_box' => null,
             ],
         ], $answer->refs);
 
