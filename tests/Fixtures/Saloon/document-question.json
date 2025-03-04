@@ -3,5 +3,5 @@
     "headers": {
         "content-type": "application\/json"
     },
-    "data": "{\"text\":\"The answer.\",\"refs\":[{\"id\":\"d1\",\"page_number\":20,\"score\":0.5881791,\"bounding_box\":null}],\"id\":\"question-id\",\"lang\":\"en\"}"
+    "data": "{\"text\":\"The answer.\",\"refs\":[{\"id\":\"d1\",\"page_number\":20,\"score\":0.5881791,\"bounding_box\":null, \"text\": \"The chunk that lead to this reference\"}],\"id\":\"question-id\",\"lang\":\"en\"}"
 }
