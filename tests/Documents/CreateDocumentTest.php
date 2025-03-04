@@ -166,4 +166,54 @@ class CreateDocumentTest extends Base
                 $body['data']['type'] === 'doc';
         });
     }
+
+    public function test_adding_empty_document_raise_error(): void
+    {
+        $mockClient = MockClient::global([
+            CreateDocumentRequest::class => MockResponse::fixture('documents-create-empty'),
+        ]);
+
+        $connector = $this->connector($mockClient);
+
+        $documentContent = [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'category' => 'page',
+                    'attributes' => [
+                        'page' => 1,
+                    ],
+                    'content' => [
+                        [
+                            'role' => 'body',
+                            'text' => '',
+                            'marks' => [],
+                            'attributes' => [
+                                'bounding_box' => [],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $data = new Document('test-empty-id', 'en', $documentContent);
+
+        $this->expectException(UnprocessableEntityException::class);
+
+        $connector->documents('localhost')->create($data);
+
+        $mockClient->assertSent(CreateDocumentRequest::class);
+
+        $mockClient->assertSentCount(1);
+
+        $mockClient->assertSent(function (Request $request) {
+            $body = $request->body()->all();
+
+            return $request->resolveEndpoint() === '/library/localhost/documents' &&
+                $body['id'] === 'test-empty-id' &&
+                $body['lang'] === 'en' &&
+                $body['data']['type'] === 'doc';
+        });
+    }
 }
