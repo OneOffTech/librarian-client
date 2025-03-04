@@ -39,6 +39,7 @@ class QuestionDocumentTest extends Base
                 'page_number' => 20,
                 'score' => 0.5881791,
                 'bounding_box' => null,
+                'text' => 'The chunk that lead to this reference',
             ],
         ], $answer->refs);
 
