@@ -3,12 +3,8 @@
 namespace OneOffTech\LibrarianClient\Tests\Summaries;
 
 use OneOffTech\LibrarianClient\Dto\Document;
-use OneOffTech\LibrarianClient\Dto\Text;
-use OneOffTech\LibrarianClient\Exceptions\ValidationException;
 use OneOffTech\LibrarianClient\Requests\StructuredExtraction\ExtractRequest;
-use OneOffTech\LibrarianClient\Requests\Summary\GenerateSummaryRequest;
 use OneOffTech\LibrarianClient\Tests\Base;
-use Saloon\Exceptions\Request\Statuses\UnprocessableEntityException;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Http\Request;
@@ -38,7 +34,7 @@ class StructuredExtractionTest extends Base
                             'marks' => [],
                             'attributes' => [
                                 'bounding_box' => [],
-                                'section' => 'Test section'
+                                'section' => 'Test section',
                             ],
                         ],
                     ],
@@ -48,7 +44,7 @@ class StructuredExtractionTest extends Base
 
         $document = new Document('test-structured-extract-id', 'en', $documentContent);
 
-        $model = <<<"STR_MODEL"
+        $model = <<<'STR_MODEL'
         {
             "type": "json_schema",
             "json_schema": {
@@ -92,19 +88,19 @@ class StructuredExtractionTest extends Base
 
             return $request->resolveEndpoint() === '/library/localhost/structured_extract' &&
                 $body['doc']['type'] === 'doc' &&
-                $body['response_model']["type"] === "json_schema" &&
+                $body['response_model']['type'] === 'json_schema' &&
                 $body['instructions'] === '' &&
                 $body['sections'][0] === 'Test section';
         });
 
         $this->assertCount(2, $extraction->content['dates']);
         $this->assertEquals([
-            "date" => "2025-03-22",
-            "context" => "We have some dates 22 march 2025, 15/04/2025 of relevance for the extraction."
+            'date' => '2025-03-22',
+            'context' => 'We have some dates 22 march 2025, 15/04/2025 of relevance for the extraction.',
         ], $extraction->content['dates'][0]);
-        
+
     }
-    
+
     public function test_extraction_in_specific_section(): void
     {
         $mockClient = MockClient::global([
@@ -128,7 +124,7 @@ class StructuredExtractionTest extends Base
                             'marks' => [],
                             'attributes' => [
                                 'bounding_box' => [],
-                                'section' => 'Test section'
+                                'section' => 'Test section',
                             ],
                         ],
                     ],
@@ -138,7 +134,7 @@ class StructuredExtractionTest extends Base
 
         $document = new Document('test-structured-extract-id', 'en', $documentContent);
 
-        $model = <<<"STR_MODEL"
+        $model = <<<'STR_MODEL'
         {
             "type": "json_schema",
             "json_schema": {
@@ -182,18 +178,18 @@ class StructuredExtractionTest extends Base
 
             return $request->resolveEndpoint() === '/library/localhost/structured_extract' &&
                 $body['doc']['type'] === 'doc' &&
-                $body['response_model']["type"] === "json_schema" &&
+                $body['response_model']['type'] === 'json_schema' &&
                 $body['instructions'] === '' &&
                 $body['sections'][0] === 'Test section';
         });
 
         $this->assertCount(2, $extraction->content['dates']);
         $this->assertEquals([
-            "date" => "2025-03-22",
-            "context" => "We have some dates 22 march 2025, 15/04/2025 of relevance for the extraction."
+            'date' => '2025-03-22',
+            'context' => 'We have some dates 22 march 2025, 15/04/2025 of relevance for the extraction.',
         ], $extraction->content['dates'][0]);
     }
-    
+
     public function test_document_missing_section_attributes(): void
     {
         $mockClient = MockClient::global([
@@ -226,7 +222,7 @@ class StructuredExtractionTest extends Base
 
         $document = new Document('test-structured-extract-id', 'en', $documentContent);
 
-        $model = <<<"STR_MODEL"
+        $model = <<<'STR_MODEL'
         {
             "type": "json_schema",
             "json_schema": {
@@ -270,18 +266,18 @@ class StructuredExtractionTest extends Base
 
             return $request->resolveEndpoint() === '/library/localhost/structured_extract' &&
                 $body['doc']['type'] === 'doc' &&
-                $body['response_model']["type"] === "json_schema" &&
+                $body['response_model']['type'] === 'json_schema' &&
                 $body['instructions'] === '' &&
                 $body['sections'][0] === 'Test section';
         });
 
         $this->assertCount(2, $extraction->content['dates']);
         $this->assertEquals([
-            "date" => "2025-03-22",
-            "context" => "We have some dates 22 march 2025, 15/04/2025 of relevance for the extraction."
+            'date' => '2025-03-22',
+            'context' => 'We have some dates 22 march 2025, 15/04/2025 of relevance for the extraction.',
         ], $extraction->content['dates'][0]);
     }
-    
+
     public function test_extraction_with_instructions(): void
     {
         $mockClient = MockClient::global([
@@ -305,7 +301,7 @@ class StructuredExtractionTest extends Base
                             'marks' => [],
                             'attributes' => [
                                 'bounding_box' => [],
-                                'section' => 'Test section'
+                                'section' => 'Test section',
                             ],
                         ],
                     ],
@@ -315,7 +311,7 @@ class StructuredExtractionTest extends Base
 
         $document = new Document('test-structured-extract-id', 'en', $documentContent);
 
-        $model = <<<"STR_MODEL"
+        $model = <<<'STR_MODEL'
         {
             "type": "json_schema",
             "json_schema": {
@@ -348,7 +344,7 @@ class StructuredExtractionTest extends Base
         }
         STR_MODEL;
 
-        $extraction = $connector->extractions('localhost')->extract($model, $document, instructions: "Within the context wrap the dates in <ins> tags.");
+        $extraction = $connector->extractions('localhost')->extract($model, $document, instructions: 'Within the context wrap the dates in <ins> tags.');
 
         $mockClient->assertSent(ExtractRequest::class);
 
@@ -359,17 +355,15 @@ class StructuredExtractionTest extends Base
 
             return $request->resolveEndpoint() === '/library/localhost/structured_extract' &&
                 $body['doc']['type'] === 'doc' &&
-                $body['response_model']["type"] === "json_schema" &&
+                $body['response_model']['type'] === 'json_schema' &&
                 $body['instructions'] === 'Within the context wrap the dates in <ins> tags.' &&
                 is_null($body['sections']);
         });
 
         $this->assertCount(2, $extraction->content['dates']);
         $this->assertEquals([
-            "date" => "2025-03-22",
-            "context" => "We have some dates 22 march 2025, 15/04/2025 of relevance for the extraction."
+            'date' => '2025-03-22',
+            'context' => 'We have some dates 22 march 2025, 15/04/2025 of relevance for the extraction.',
         ], $extraction->content['dates'][0]);
     }
-
-
 }

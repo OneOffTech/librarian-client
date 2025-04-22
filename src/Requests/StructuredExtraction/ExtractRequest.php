@@ -5,7 +5,6 @@ namespace OneOffTech\LibrarianClient\Requests\StructuredExtraction;
 use OneOffTech\LibrarianClient\Dto\Document;
 use OneOffTech\LibrarianClient\Dto\Extraction;
 use OneOffTech\LibrarianClient\Dto\ResponseSchema;
-use OneOffTech\LibrarianClient\Dto\Text;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -15,7 +14,7 @@ use Saloon\Traits\Body\HasJsonBody;
 class ExtractRequest extends Request implements HasBody
 {
     use HasJsonBody;
-    
+
     protected Method $method = Method::POST;
 
     public function __construct(
