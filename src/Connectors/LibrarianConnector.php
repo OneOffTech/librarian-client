@@ -7,6 +7,7 @@ use OneOffTech\LibrarianClient\Resources\DocumentResource;
 use OneOffTech\LibrarianClient\Resources\LibraryResource;
 use OneOffTech\LibrarianClient\Resources\PromptResource;
 use OneOffTech\LibrarianClient\Resources\QuestionResource;
+use OneOffTech\LibrarianClient\Resources\StructuredExtractionResource;
 use OneOffTech\LibrarianClient\Resources\SummaryResource;
 use OneOffTech\LibrarianClient\Responses\LibrarianResponse;
 use Saloon\Http\Auth\TokenAuthenticator;
@@ -113,5 +114,10 @@ class LibrarianConnector extends Connector
     public function classifiers(string $library_id): ClassifierResource
     {
         return new ClassifierResource($library_id, $this);
+    }
+
+    public function extractions(string $library_id): StructuredExtractionResource
+    {
+        return new StructuredExtractionResource($library_id, $this);
     }
 }

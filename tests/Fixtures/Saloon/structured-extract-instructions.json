@@ -1,0 +1,8 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "content-length": "235",
+        "content-type": "application\/json"
+    },
+    "data": "{\"dates\":[{\"date\":\"2025-03-22\",\"context\":\"We have some dates 22 march 2025, 15\/04\/2025 of relevance for the extraction.\"},{\"date\":\"2025-04-15\",\"context\":\"We have some dates 22 march 2025, 15\/04\/2025 of relevance for the extraction.\"}]}"
+}
