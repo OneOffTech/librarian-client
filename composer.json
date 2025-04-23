@@ -1,6 +1,6 @@
 {
     "name": "oneofftech/librarian-client",
-    "description": "This is my package librarian-client",
+    "description": "OneOffTech Librarian AI service client.",
     "keywords": [
         "oneofftech",
         "librarian-client"
