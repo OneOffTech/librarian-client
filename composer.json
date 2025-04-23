@@ -18,7 +18,8 @@
         "php": "^8.2",
         "cuyz/valinor": "^1.12",
         "respect/validation": "^2.3",
-        "saloonphp/saloon": "^3.6"
+        "saloonphp/saloon": "^3.6",
+        "oneofftech/parse-client": "^0.2"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
