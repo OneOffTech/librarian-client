@@ -5,6 +5,7 @@ namespace OneOffTech\LibrarianClient\Resources;
 use OneOffTech\LibrarianClient\Dto\Classifier;
 use OneOffTech\LibrarianClient\Dto\Text;
 use OneOffTech\LibrarianClient\Dto\TextClassification;
+use OneOffTech\LibrarianClient\Requests\Classifier\ClassifyDocumentRequest;
 use OneOffTech\LibrarianClient\Requests\Classifier\ClassifyTextRequest;
 use OneOffTech\LibrarianClient\Requests\Classifier\CreateClassifierRequest;
 use OneOffTech\LibrarianClient\Requests\Classifier\DeleteClassifierRequest;
@@ -43,5 +44,10 @@ class ClassifierResource extends BaseResource
     public function classify(string $classifier_id, Text $text): TextClassification
     {
         return $this->connector->send((new ClassifyTextRequest($this->library_id, $classifier_id, $text))->validate())->dto();
+    }
+
+    public function classifyDocument(string $classifier_id, string $document_id): TextClassification
+    {
+        return $this->connector->send((new ClassifyDocumentRequest($this->library_id, $classifier_id, $document_id)))->dto();
     }
 }
