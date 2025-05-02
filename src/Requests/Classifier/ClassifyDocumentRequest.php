@@ -3,11 +3,7 @@
 namespace OneOffTech\LibrarianClient\Requests\Classifier;
 
 use OneOffTech\LibrarianClient\Dto\ClassificationResultCollection;
-use OneOffTech\LibrarianClient\Dto\Text;
 use OneOffTech\LibrarianClient\Dto\TextClassification;
-use OneOffTech\LibrarianClient\Exceptions\ValidationException as ExceptionsValidationException;
-use Respect\Validation\Exceptions\ValidationException;
-use Respect\Validation\Validator;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
