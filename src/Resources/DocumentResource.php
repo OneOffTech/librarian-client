@@ -7,6 +7,8 @@ use OneOffTech\LibrarianClient\Dto\Document;
 use OneOffTech\LibrarianClient\Dto\DocumentsCollection;
 use OneOffTech\LibrarianClient\Dto\Question;
 use OneOffTech\LibrarianClient\Dto\Text;
+use OneOffTech\LibrarianClient\Dto\TextClassification;
+use OneOffTech\LibrarianClient\Requests\Classifier\ClassifyDocumentRequest;
 use OneOffTech\LibrarianClient\Requests\Document\AllDocumentRequest;
 use OneOffTech\LibrarianClient\Requests\Document\CreateDocumentRequest;
 use OneOffTech\LibrarianClient\Requests\Document\DeleteDocumentRequest;
@@ -47,6 +49,11 @@ class DocumentResource extends BaseResource
     public function ask(string $id, Question $question): Answer
     {
         return $this->connector->send((new QuestionDocumentRequest($this->library_id, $id, $question))->validate())->dto();
+    }
+
+    public function classify(string $classifier_id, string $document_id): TextClassification
+    {
+        return $this->connector->send((new ClassifyDocumentRequest($this->library_id, $classifier_id, $document_id)))->dto();
     }
 
     public function create(Document $document): LibrarianResponse
