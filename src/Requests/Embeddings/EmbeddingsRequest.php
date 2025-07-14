@@ -2,10 +2,7 @@
 
 namespace OneOffTech\LibrarianClient\Requests\Embeddings;
 
-use OneOffTech\LibrarianClient\Dto\Document;
 use OneOffTech\LibrarianClient\Dto\Embeddings;
-use OneOffTech\LibrarianClient\Dto\Extraction;
-use OneOffTech\LibrarianClient\Dto\ResponseSchema;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -26,7 +23,7 @@ class EmbeddingsRequest extends Request implements HasBody
 
     public function resolveEndpoint(): string
     {
-        return "/embeddings";
+        return '/embeddings';
     }
 
     protected function defaultBody(): array

@@ -129,8 +129,8 @@ class LibrarianConnector extends Connector
     public function embeddings(array $text): Embeddings
     {
         return $this->send(new EmbeddingsRequest(
-                text: $text
-            ))
+            text: $text
+        ))
             ->dto();
     }
 }

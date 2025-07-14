@@ -2,9 +2,7 @@
 
 namespace OneOffTech\LibrarianClient\Tests\Embeddings;
 
-use OneOffTech\LibrarianClient\Dto\Document;
 use OneOffTech\LibrarianClient\Requests\Embeddings\EmbeddingsRequest;
-use OneOffTech\LibrarianClient\Requests\StructuredExtraction\ExtractRequest;
 use OneOffTech\LibrarianClient\Tests\Base;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
@@ -36,5 +34,4 @@ class EmbeddingsTest extends Base
         $this->assertCount(1, $embeddings->vectors);
 
     }
-
 }
