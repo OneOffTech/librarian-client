@@ -1,6 +1,6 @@
 <?php
 
-namespace OneOffTech\LibrarianClient\Tests\Summaries;
+namespace OneOffTech\LibrarianClient\Tests\StructuredExtraction;
 
 use OneOffTech\LibrarianClient\Dto\Document;
 use OneOffTech\LibrarianClient\Requests\StructuredExtraction\ExtractRequest;

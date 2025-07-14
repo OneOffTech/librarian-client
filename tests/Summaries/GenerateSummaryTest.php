@@ -37,9 +37,46 @@ class GenerateSummaryTest extends Base
             $body = $request->body()->all();
 
             return $request->resolveEndpoint() === '/library/localhost/summary' &&
-                $body['id'] === 'id' &&
-                $body['lang'] === 'en' &&
-                $body['text'] === 'The text to summarize';
+                $body['text']['id'] === 'id' &&
+                $body['text']['lang'] === 'en' &&
+                $body['text']['text'] === 'The text to summarize';
+        });
+
+        $this->assertEquals('id', $summary->id);
+        $this->assertEquals('en', $summary->language);
+        $this->assertEquals('The summary.', $summary->content);
+    }
+
+    public function test_summary_generated_using_custom_prompt(): void
+    {
+        $mockClient = MockClient::global([
+            GenerateSummaryRequest::class => MockResponse::fixture('summaries-generate'),
+        ]);
+
+        $connector = $this->connector($mockClient);
+
+        $data = new Text(
+            id: 'id',
+            language: 'en',
+            content: 'The text to summarize',
+        );
+
+        $prompt = 'Rewrite {{text}}';
+
+        $summary = $connector->summaries('localhost')->generate($data, $prompt);
+
+        $mockClient->assertSent(GenerateSummaryRequest::class);
+
+        $mockClient->assertSentCount(1);
+
+        $mockClient->assertSent(function (Request $request) {
+            $body = $request->body()->all();
+
+            return $request->resolveEndpoint() === '/library/localhost/summary' &&
+                $body['text']['id'] === 'id' &&
+                $body['text']['lang'] === 'en' &&
+                $body['text']['text'] === 'The text to summarize';
+            $body['prompt'] === 'Rewrite {{text}}';
         });
 
         $this->assertEquals('id', $summary->id);

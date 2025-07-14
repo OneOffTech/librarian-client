@@ -22,8 +22,8 @@ class SummaryResource extends BaseResource
     /**
      * Generate a summary of the specified text
      */
-    public function generate(Text $text): Text
+    public function generate(Text $text, ?string $prompt = null): Text
     {
-        return $this->connector->send((new GenerateSummaryRequest($this->library_id, $text))->validate())->dto();
+        return $this->connector->send((new GenerateSummaryRequest($this->library_id, $text, $prompt))->validate())->dto();
     }
 }
