@@ -2,6 +2,8 @@
 
 namespace OneOffTech\LibrarianClient\Connectors;
 
+use OneOffTech\LibrarianClient\Dto\Embeddings;
+use OneOffTech\LibrarianClient\Requests\Embeddings\EmbeddingsRequest;
 use OneOffTech\LibrarianClient\Resources\ClassifierResource;
 use OneOffTech\LibrarianClient\Resources\DocumentResource;
 use OneOffTech\LibrarianClient\Resources\LibraryResource;
@@ -119,5 +121,16 @@ class LibrarianConnector extends Connector
     public function extractions(string $library_id): StructuredExtractionResource
     {
         return new StructuredExtractionResource($library_id, $this);
+    }
+
+    /**
+     * Compute the embeddings of a text
+     */
+    public function embeddings(array $text): Embeddings
+    {
+        return $this->send(new EmbeddingsRequest(
+                text: $text
+            ))
+            ->dto();
     }
 }
