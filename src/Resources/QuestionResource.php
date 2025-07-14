@@ -17,7 +17,7 @@ class QuestionResource extends BaseResource
      * Constructor
      */
     public function __construct(
-        readonly protected string $library_id,
+        protected readonly string $library_id,
         Connector $connector
     ) {
         parent::__construct($connector);
