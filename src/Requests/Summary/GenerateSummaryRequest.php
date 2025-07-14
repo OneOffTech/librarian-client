@@ -20,7 +20,8 @@ class GenerateSummaryRequest extends Request implements HasBody
 
     public function __construct(
         protected readonly string $library_id,
-        protected readonly Text $text
+        protected readonly Text $text,
+        protected readonly ?string $prompt = null,
     ) {
         //
     }
@@ -33,9 +34,12 @@ class GenerateSummaryRequest extends Request implements HasBody
     protected function defaultBody(): array
     {
         return [
-            'id' => $this->text->id,
-            'lang' => $this->text->language,
-            'text' => $this->text->content,
+            'text' => [
+                'id' => $this->text->id,
+                'lang' => $this->text->language,
+                'text' => $this->text->content,
+            ],
+            'prompt' => $this->prompt,
         ];
     }
 
