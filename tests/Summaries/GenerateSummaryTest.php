@@ -61,7 +61,7 @@ class GenerateSummaryTest extends Base
             content: 'The text to summarize',
         );
 
-        $prompt = "Rewrite {{text}}";
+        $prompt = 'Rewrite {{text}}';
 
         $summary = $connector->summaries('localhost')->generate($data, $prompt);
 
@@ -76,7 +76,7 @@ class GenerateSummaryTest extends Base
                 $body['text']['id'] === 'id' &&
                 $body['text']['lang'] === 'en' &&
                 $body['text']['text'] === 'The text to summarize';
-                $body['prompt'] === 'Rewrite {{text}}';
+            $body['prompt'] === 'Rewrite {{text}}';
         });
 
         $this->assertEquals('id', $summary->id);
